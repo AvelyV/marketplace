@@ -10,10 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_10_031248) do
+ActiveRecord::Schema.define(version: 2021_11_10_040849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "listings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "location_id", null: false
+    t.string "title"
+    t.text "description"
+    t.integer "price"
+    t.integer "qty"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_listings_on_location_id"
+    t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "state"
+    t.string "suburb"
+    t.integer "postcode"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "ratings", force: :cascade do |t|
     t.integer "rating"
@@ -56,6 +83,8 @@ ActiveRecord::Schema.define(version: 2021_11_10_031248) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "listings", "locations"
+  add_foreign_key "listings", "users"
   add_foreign_key "ratings", "users", column: "rating_giver_id"
   add_foreign_key "ratings", "users", column: "rating_receiver_id"
 end
