@@ -1,26 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listings</h1>
-
-
 <br>
 
 <%= link_to 'New Listing', new_listing_path %>
 
-
-<% @listings.each do |listing| %>
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-
-    <tr>
-      <h5 class="card-title"><%= listing.title %></h5>
-    
-      <p class="card-text"><%= listing.description %></p>
-      <%= link_to 'Edit', edit_listing_path(listing), class:"btn btn-primary" %>
-
-
-
-  </div>
+<div class="row">
+  <% @listings.each do |listing| %>
+      <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+              <%# image_tag listing.picture, class:"card-img-top" %>
+              <div class="card-body">
+                  <h5 class="card-title"><%= listing.title %>></h5>
+                  <p class="card-text menu-description"><%= listing.description %></p>
+                  <p class="card-text">$<%= listing.price %></p>
+                  <%= link_to "Show more", listing_path(listing.id), class:"btn btn-primary btn-right" %>
+              </div>
+          </div>
+      </div>
+  <% end %>
 </div>
-<% end %>
