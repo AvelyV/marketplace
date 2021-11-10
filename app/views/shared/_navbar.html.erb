@@ -8,6 +8,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+  
+            <%= link_to "Listings", listings_path, class: "nav-link" %>
+            </li>
  
           <%# is user is signed in show sign out and edit profile links %>
           <% if user_signed_in? %>

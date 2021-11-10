@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_10_040849) do
+ActiveRecord::Schema.define(version: 2021_11_10_041214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 2021_11_10_040849) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "listing_categories", force: :cascade do |t|
+    t.bigint "listing_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_listing_categories_on_category_id"
+    t.index ["listing_id"], name: "index_listing_categories_on_listing_id"
   end
 
   create_table "listings", force: :cascade do |t|
@@ -83,6 +92,8 @@ ActiveRecord::Schema.define(version: 2021_11_10_040849) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "listing_categories", "categories"
+  add_foreign_key "listing_categories", "listings"
   add_foreign_key "listings", "locations"
   add_foreign_key "listings", "users"
   add_foreign_key "ratings", "users", column: "rating_giver_id"

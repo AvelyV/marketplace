@@ -1,5 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :correct_user, only: %i[edit update destroy show]
 
   # GET /listings or /listings.json
   def index
@@ -65,5 +67,10 @@ class ListingsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def listing_params
       params.require(:listing).permit(:user_id, :location_id, :title, :description, :price, :qty)
+    end
+
+    def correct_user
+      @listing = current_user.listings.find_by(id: params[:id])
+      redirect_to listings_path, notice: "Not authorised to alter this listing" if @listing.nil?
     end
 end
