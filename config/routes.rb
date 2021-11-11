@@ -3,5 +3,8 @@ Rails.application.routes.draw do
   resources :ratings
   devise_for :users
   root 'pages#home'
+  get "/buy", to: "orders#buy", as: "buy"
+  get "/success", to: "orders#seccess", as: "success"
+  get "/cancel", to: "orders#cancel", as: "cancel"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -5,3 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.create!(email: "test@test.com", password: "password")
+User.create!(email: "a@b.com", password: "password")
+
+Category.create!(name: "WFBP")
+Category.create!(name: "Gluten free")
+Category.create!(name: "Raw")
+Category.create!(name: "Sweet")
+Category.create!(name: "Frozen")
+Category.create!(name: "Fresh")
+Category.create!(name: "Savory")
+Category.create!(name: "Soup")
+Category.create!(name: "Pasta")
+
+
+puts "#{User.count}/2 users were created"
+puts "#{Category.count}/9 categories were created"
+puts "#{Location.count}/x locations were created"
+puts "#{Listing.count}/x listings were created"

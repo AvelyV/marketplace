@@ -29,6 +29,8 @@
   <strong>Qty:</strong>
   <%= @listing.qty %>
 </p>
-
+<% if user_signed_in? && current_user != @listing.user %>
+<%= link_to 'Buy', buy_path, class:"btn btn-primary" %> |
+<% end %>
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
 <%= link_to 'Back', listings_path %>
