@@ -23,13 +23,27 @@ class OrdersController < ApplicationController
             success_url: success_url,
             cancel_url: cancel_url
           })
-
+        # respond_to do |format|
+        #     format.js
+        # end
         redirect_to session.url
     end
 
     def success
         # reduce qty on the listing by qty bought
-        
+        if params[:session_id].present? 
+            # session.delete(:cart)
+            session[:order] = [] # empty cart = empty array
+            @session_with_expand = Stripe::Checkout::Session.retrieve({ id: params[:session_id], expand: ["line_items"]})
+            @session_with_expand.line_items.data.each do |line_item|
+              listing = Listing.find_by(stripe_product_id: line_item.price.listing)
+            end
+          
+        #   else
+        #     redirect_to cancel_url, alert: "No info to display"
+          end
+
+        redirect_to listings_path, notice: "Payment Seccessful"
     end
 
     def cancel

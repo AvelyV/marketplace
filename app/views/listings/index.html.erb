@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Listings</h1>
 <br>
@@ -11,9 +10,9 @@
 
               <%= cl_image_tag listing.picture.key, crop: :scale, class:"card-img-top", width: 300, cloud_name: 'dzfu3lc6p' if listing.picture.attached? %>
               <div class="card-body">
-                  <h5 class="card-title"><%= listing.title %></h5>
-                  <p class="card-text menu-description"><%= listing.description %></p>
-                  <p class="card-text">$<%= listing.price %></p>
+                  <h5 class="card-title"><%= listing %></h5>
+                  <p class="card-text menu-description "><%= listing.description %></p>
+                  <p class="card-text"><%= number_to_currency(listing.price/100) %></p>
                   <%= link_to "Show more", listing_path(listing.id), class:"btn btn-primary btn-right" %>
               </div>
 

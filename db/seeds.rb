@@ -18,6 +18,10 @@ Category.create!(name: "Savory")
 Category.create!(name: "Soup")
 Category.create!(name: "Pasta")
 
+a = Location.create!(state: "QLD", suburb: "Brisbane City", postcode: "4000")
+
+Listing.create!(title: "Pancakes", )
+
 
 puts "#{User.count}/2 users were created"
 puts "#{Category.count}/9 categories were created"
