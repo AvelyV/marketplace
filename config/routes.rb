@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :ratings
   devise_for :users
   root 'pages#home'
+  resources :webhooks, only: [:create]
   get "/buy/:listing_id", to: "orders#buy", as: "buy"
   get "/success", to: "orders#success", as: "success"
   get "/cancel", to: "orders#cancel", as: "cancel"
