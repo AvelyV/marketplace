@@ -66,3 +66,8 @@ gem "devise", "~> 4.8"
 gem "rolify", "~> 6.0"
 
 gem "pundit", "~> 2.1"
+
+gem "cloudinary", "~> 1.21"
+gem "activestorage-cloudinary-service", "~> 0.2.3"
+
+gem "dotenv-rails", "~> 2.7"
