@@ -20,16 +20,16 @@
   <!-- Location Attributes -->
   <%= simple_fields_for :location do |l| %>
 
-  <div class="form-inputs">
-    <%= l.input :state, as: :select, collection: ["QLD", "NSW", "TAS", "VIC", "WA", "NT", "SA", "ACT"] %>
-    <%= l.input :suburb %>
-    <%= l.input :postcode %>
-  </div>
+    <div class="form-inputs">
+      <%= l.input :state, as: :select, collection: ["QLD", "NSW", "TAS", "VIC", "WA", "NT", "SA", "ACT"] %>
+      <%= l.input :suburb %>
+      <%= l.input :postcode %>
+    </div>
 
+  <% end %>
   <%= f.input :picture, as: :file %>
   
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
-<% end %>
 <% end %>

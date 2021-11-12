@@ -36,16 +36,21 @@ class OrdersController < ApplicationController
             session[:order] = [] # empty cart = empty array
             @session_with_expand = Stripe::Checkout::Session.retrieve({ id: params[:session_id], expand: ["line_items"]})
             @session_with_expand.line_items.data.each do |line_item|
-              listing = Listing.find_by(stripe_product_id: line_item.price.listing)
+              @listing = Listing.find_by(stripe_product_id: line_item.price.listing)
+              @listing.update(sales_count: @listing.sales_count += 1)
+              @listing.increment!(:sales_count)
+
+              raise
             end
           
-        #   else
-        #     redirect_to cancel_url, alert: "No info to display"
+          # else
+          #   redirect_to cancel_url
           end
-
+        
         redirect_to listings_path, notice: "Payment Seccessful"
     end
 
     def cancel
+      redirect_to listings_path, alert: "Something went wrong, try again"
     end
 end
