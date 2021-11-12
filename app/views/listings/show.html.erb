@@ -1,35 +1,26 @@
-
-<p>
-  <strong>User:</strong>
-  <%= @listing.user_id %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @listing.location_id %>
-</p>
-
-<p>
-  <strong>Title:</strong>
+<h1>
   <%= @listing.title %>
-</p>
+</h1>
 
 <p>
-  <strong>Description:</strong>
   <%= @listing.description %>
 </p>
 
 <p>
-  <strong>Price:</strong>
-  <%= @listing.price %>
+  <%= number_to_currency(@listing.price/100) %>
 </p>
 
 <p>
-  <strong>Qty:</strong>
+  Available:
   <%= @listing.qty %>
 </p>
+
+<p>
+  <%= @listing.location %>
+</p>
+
 <% if user_signed_in? && current_user != @listing.user %>
-<%= link_to 'Buy Now', buy_path(@listing.id), class:"btn btn-primary" %> |
+<%= link_to 'Buy One', buy_path(@listing.id), class:"btn btn-primary" %> |
 <% end %>
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
 <%= link_to 'Back', listings_path %>

@@ -2,6 +2,7 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
   before_action :correct_user, only: %i[edit update destroy]
+  before_action :set_category, only: %i[new edit]
 
   # GET /listings or /listings.json
   def index
@@ -49,6 +50,7 @@ class ListingsController < ApplicationController
     end
   end
 
+
   # DELETE /listings/1 or /listings/1.json
   def destroy
     @listing.destroy
@@ -66,11 +68,15 @@ class ListingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def listing_params
-      params.require(:listing).permit(:user_id, :location_id, :title, :description, :price, :qty, :picture)
+      params.require(:listing).permit(:user_id, :location_id, :title, :description, :price, :qty, :picture, category_ids: [], location: [])
     end
 
     def correct_user
       @listing = current_user.listings.find_by(id: params[:id])
       redirect_to listings_path, notice: "Not authorised to alter this listing" if @listing.nil?
+    end
+
+    def set_category
+      @categories = Category.all
     end
 end
