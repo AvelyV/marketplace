@@ -27,14 +27,16 @@ class ListingsController < ApplicationController
     # create location
     location = Location.new(location_params)
     loc_exist = Location.find_by(location_params)
+    
     # if location exists
     if loc_exist
+      # point to excisting record
       @listing.location_id = loc_exist.id
-
-    # if location does not exist
+    # if location does not exist, create
     else
       Location.create!(location_params)
     end
+
     respond_to do |format|
       if @listing.save
         format.html { redirect_to @listing, notice: "Listing was successfully created." }

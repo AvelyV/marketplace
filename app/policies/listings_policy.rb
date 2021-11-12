@@ -25,7 +25,7 @@ class ListingsPolicy
   end
 
   def update?
-    return user.has_any_role?(:admin)
+    true
   end
 
   def edit?
@@ -33,7 +33,7 @@ class ListingsPolicy
   end
 
   def destroy?
-    false
+    true
   end
 
   class Scope

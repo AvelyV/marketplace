@@ -18,14 +18,15 @@ Category.create!(name: "Savory")
 Category.create!(name: "Soup")
 Category.create!(name: "Pasta")
 
-a = Location.create!(state: "QLD", suburb: "Brisbane", postcode: "4000")
+Location.create!(state: "QLD", suburb: "Brisbane", postcode: "4000")
+Location.create!(state: "NSW", suburb: "Yamba", postcode: "2464")
 
 Listing.create!(title: "Fluffy Pancakes", description: "It’s been lovely. My pancake endeavors have paid off, too. 
     I realized the other day that I don’t have a basic pancake recipe on the blog, so here we are. 
     Meet my new favorite pancake recipe. It’s easy, healthy and vegan, to boot!", price: 1000, qty: 4, user_id: 1, location_id: 1)
-
+Listing.create!(title: "Buddha Bowl", description: "Super yummi food that is raw and will fill you up for 3 days. highly reccomend, my absolute favorite, now my family eats olny 3 meals per week, real money saver", price: 1200, qty: 2, user_id: 2, location_id: 2)
 
 puts "#{User.count}/2 users were created"
 puts "#{Category.count}/9 categories were created"
-puts "#{Location.count}/1 locations were created"
-puts "#{Listing.count}/1 listings were created"
+puts "#{Location.count}/2 locations were created"
+puts "#{Listing.count}/2 listings were created"

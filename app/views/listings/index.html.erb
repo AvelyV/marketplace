@@ -12,7 +12,7 @@
               <div class="card-body">
                   <h5 class="card-title"><%= listing %></h5>
                   <p class="card-text menu-description "><%= listing.description %></p>
-                  <p class="card-text"><%= number_to_currency(listing.price/100) %></p>
+                  <p class="card-text"><%= number_to_currency(listing.price) %></p>
                   <%= link_to "Show more", listing_path(listing.id), class:"btn btn-primary btn-right" %>
               </div>
 

@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
               product_data: {
                 name: listing.title
               },
-              unit_amount: listing.price
+              unit_amount: (listing.price * 100).to_i
             },
             quantity: 1
           }
@@ -37,16 +37,20 @@ class OrdersController < ApplicationController
             @session_with_expand = Stripe::Checkout::Session.retrieve({ id: params[:session_id], expand: ["line_items"]})
             @session_with_expand.line_items.data.each do |line_item|
               @listing = Listing.find_by(stripe_product_id: line_item.price.listing)
-              @listing.update(sales_count: @listing.sales_count += 1)
-              @listing.increment!(:sales_count)
+              
+              @listing.update(@listing.decrement!(:qty, 1))
+              # @listing.update(sales_count: @listing.sales_count += 1)
+              # @listing.increment!(:sales_count)
 
               raise
             end
           
           # else
           #   redirect_to cancel_url
-          end
+        end
+    end
         
+    def success
         redirect_to listings_path, notice: "Payment Seccessful"
     end
 

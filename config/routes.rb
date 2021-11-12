@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   get "/buy/:listing_id", to: "orders#buy", as: "buy"
   get "/success", to: "orders#success", as: "success"
   get "/cancel", to: "orders#cancel", as: "cancel"
+  get "/user/:id", to: "users#show", as: "user"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
