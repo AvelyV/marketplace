@@ -14,6 +14,7 @@ class Listing < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :description, presence: true, length: { minimum: 50, maximum: 1000 }
   validates :qty, presence: true, numericality: { greater_than_or_equal_to: 1 }
+  
 
   def to_s
     title
