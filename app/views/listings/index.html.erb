@@ -3,16 +3,16 @@
 <br>
 
 
-<div class="row">
+<div class="flex">
+
   <% @listings.each do |listing| %>
-      <div class="col-md-4">
+
           <div class="card" style="width: 18rem;">
             <% if !listing.picture.attached? %>
-            <%= image_tag "chili", class:"card-img-top index-img", width: 300, height: 200 %>
+            <%= image_tag "brachiosaur", class:"card-img-top index-img", width: 300, height: 200 %>
           <% else %>
             <%= cl_image_tag listing.picture.key, crop: :fill, class:"card-img-top index-img", width: 300, height: 200, cloud_name: 'dzfu3lc6p' %>
           <% end %>
-              <%# cl_image_tag listing.picture.key, crop: :scale, class:"card-img-top", width: 300, cloud_name: 'dzfu3lc6p' if listing.picture.attached? %>
               <div class="card-body">
                   <h5 class="card-title"><%= listing.title %></h5>
                   <p class="card-text menu-description "><%= listing.description %></p>
@@ -20,8 +20,8 @@
                   <p class="card-text"><%= number_to_currency(listing.price) %></p>
                   <%= link_to "Show more", listing_path(listing.id), class:"btn btn-primary btn-right" %>
               </div>
-
           </div>
-      </div>
+
   <% end %>
+
 </div>

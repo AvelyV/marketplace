@@ -5,6 +5,8 @@
         
           <hr class="my-4">
           <p ><%= @listing.description %></p>
+          <!-- add username? -->
+          <p > Listing by: <%=link_to "#{@listing.user.email}", user_path(@listing.user.id) %></p>
           <p >Available:<%= @listing.qty %></p>
           <p ><%= @listing.location %></p>
           <p ><%= number_to_currency(@listing.price) %></p>
@@ -29,5 +31,4 @@
       </div> 
 
   </div> 
-
 </div>
