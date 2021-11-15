@@ -9,7 +9,7 @@
 
           <div class="card" style="width: 18rem;">
             <% if !listing.picture.attached? %>
-            <%= image_tag "brachiosaur", class:"card-img-top index-img", width: 300, height: 200 %>
+            <%= image_tag "brachiosaur.jpg", class:"card-img-top index-img", width: 300, height: 200 %>
           <% else %>
             <%= cl_image_tag listing.picture.key, crop: :fill, class:"card-img-top index-img", width: 300, height: 200, cloud_name: 'dzfu3lc6p' %>
           <% end %>
