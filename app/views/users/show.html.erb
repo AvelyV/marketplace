@@ -26,10 +26,11 @@
   
   </div>
 
-<div class="leave-rating">
-  <%= link_to 'Leave a rating', create_rating_path(@user.id), class:"nav-link" %>
-  
-</div>
+<% if @user != current_user %>
+  <div class="leave-rating">
+    <%= link_to 'Leave a rating', create_rating_path(@user.id), class:"btn btn-primary" %>
+  </div>
+<% end %>
 
 <div class="ratings-of">
   <div class="flex">
