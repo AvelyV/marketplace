@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get "/buy/:listing_id", to: "orders#buy", as: "buy"
   get "/success", to: "orders#success", as: "success"
   get "/cancel", to: "orders#cancel", as: "cancel"
+
+  get "/rating/:id", to: "ratings#new", as: "create_rating"
   
   # profile page
   get "/user/:id", to: "users#show", as: "user"

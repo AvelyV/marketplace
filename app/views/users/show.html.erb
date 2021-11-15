@@ -25,3 +25,28 @@
     <% end %>
   
   </div>
+
+<div class="leave-rating">
+  <%= link_to 'Leave a rating', create_rating_path(@user.id), class:"nav-link" %>
+  
+</div>
+
+<div class="ratings-of">
+  <div class="flex">
+
+    <% @user.ratings_received.each do |rating| %>
+  
+            <div class="card" style="width: 18rem;">
+            
+                <div class="card-body">
+                    <h5 class="card-title"><%= rating.rating %>/10</h5>
+                    <p class="card-text menu-description "><%= rating.comment %></p>
+                    <p>By <%= rating.rating_giver.first_name %></p>
+
+                </div>
+            </div>
+  
+    <% end %>
+  
+  </div>
+</div>
