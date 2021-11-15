@@ -12,9 +12,9 @@ Location.destroy_all
 Listing.destroy_all
 
 a = User.create!(email: "test@test.com", password: "password", first_name: "Molly", last_name: "McTesty",
-             about_me: "I like to cook and share it with the world. All my meals are vegan and super convenient")
-b =User.create!(email: "a@b.com", password: "password", first_name: "Albert", last_name: "test",
-             about_me: "I'm just here to get access to yummy meals. I mostly like comfort food")
+             about_me: "I like to cook and share it with the world. All my meals are vegan and super convenient", username: "MollyHolly")
+b = User.create!(email: "a@b.com", password: "password", first_name: "Albert", last_name: "test",
+             about_me: "I'm just here to get access to yummy meals. I mostly like comfort food", username: "Foodie765")
 
 Category.create!(name: "WFBP")
 Category.create!(name: "Gluten free")

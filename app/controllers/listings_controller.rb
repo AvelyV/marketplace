@@ -3,6 +3,7 @@ class ListingsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :correct_user, only: %i[edit update destroy]
   before_action :set_category, only: %i[new edit]
+  
 
   # GET /listings or /listings.json
   def index
@@ -68,6 +69,21 @@ class ListingsController < ApplicationController
       format.html { redirect_to listings_url, notice: "Listing was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    if params[:type] == "user"
+      @listings = []
+      users = Listing.where("username LIKE ?", "%#{params[:query]}%")
+      users.each do |user|
+        user.listings do |listing|
+          @listings.push(listing)
+        end
+      end
+    else
+      @listings = Listing.where("? LIKE ?", "%#{params[:type]}%", "%#{params[:query]}%")
+    end
+    render "index"
   end
 
   private

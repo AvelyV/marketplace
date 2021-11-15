@@ -1,36 +1,42 @@
-<h1><%= @user.first_name %></h1>
-<%= @user.email %>
-<%= @user.about_me %>
+<h1><%= @user.username %></h1>
+<% if @user != current_user %>
+  <div class="leave-rating">
+    <%= link_to 'Leave a rating', create_rating_path(@user.id), class:"btn btn-primary rating" %>
+  </div>
+<% end %>
+<div><%= @user.about_me %></div>
+<div>
+  <h2>Contact details</h2>
+  <p>Email: <%= @user.email %></p>
+</div>
 
-<h2><%= @user.first_name  %>'s Listings:</h2>
+
+
 <div class="flex">
 
     <% @user.listings.each do |listing| %>
-  
-            <div class="card" style="width: 18rem;">
-              <% if !listing.picture.attached? %>
-              <%= image_tag "brachiosaur.jpg", class:"card-img-top index-img", width: 300, height: 200 %>
-            <% else %>
-              <%= cl_image_tag listing.picture.key, crop: :fill, class:"card-img-top index-img", width: 300, height: 200, cloud_name: 'dzfu3lc6p' %>
-            <% end %>
-                <div class="card-body">
-                    <h5 class="card-title"><%= listing.title %></h5>
-                    <p class="card-text menu-description "><%= listing.description %></p>
-                    <p class="card-text"><%= listing.location %></p>
-                    <p class="card-text"><%= number_to_currency(listing.price) %></p>
-                    <%= link_to "Show more", listing_path(listing.id), class:"btn btn-primary btn-right" %>
-                </div>
-            </div>
-  
+      <% if listing.qty > 0 %>
+        <h2><%= @user.username  %>'s Listings:</h2>
+        <div class="card" style="width: 18rem;">
+          <% if !listing.picture.attached? %>
+            <%= image_tag "brachiosaur.jpg", class:"card-img-top index-img", width: 300, height: 200 %>
+          <% else %>
+            <%= cl_image_tag listing.picture.key, crop: :fill, class:"card-img-top index-img", width: 300, height: 200, cloud_name: 'dzfu3lc6p' %>
+          <% end %>
+          <div class="card-body">
+              <h5 class="card-title"><%= listing.title %></h5>
+              <p class="card-text menu-description "><%= listing.description %></p>
+              <p class="card-text"><%= listing.location %></p>
+              <p class="card-text"><%= number_to_currency(listing.price) %></p>
+              <%= link_to "Show more", listing_path(listing.id), class:"btn btn-primary btn-right" %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   
   </div>
 
-<% if @user != current_user %>
-  <div class="leave-rating">
-    <%= link_to 'Leave a rating', create_rating_path(@user.id), class:"btn btn-primary" %>
-  </div>
-<% end %>
+
 
 <div class="ratings-of">
   <div class="flex">

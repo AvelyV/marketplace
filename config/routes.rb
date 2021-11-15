@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   get "/success", to: "orders#success", as: "success"
   get "/cancel", to: "orders#cancel", as: "cancel"
 
+
+  get "/search", to: "listings#search", as: "search"
+
+  # giving a rating
   get "/rating/:id", to: "ratings#new", as: "create_rating"
   
   # profile page
