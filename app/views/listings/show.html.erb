@@ -24,7 +24,7 @@
       </div>
       <div class="col-md-6">
         <% if !@listing.picture.attached? %>
-          <%= image_tag "icecream", class:"listing-image"%>
+          <%= image_tag "brachiosaur.jpg", class:"listing-image"%>
         <% else %>
           <%= cl_image_tag @listing.picture.key, crop: :scale, class:"listing-image", cloud_name: 'dzfu3lc6p' %>
         <% end %>
