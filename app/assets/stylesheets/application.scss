@@ -14,7 +14,16 @@
  *= require_self
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
+
+$primary: #12dbb0;
+$secondary: #00c79c;
+$danger: #ff4136;
+
 @import "bootstrap";
+
+
+
+
 
 .flex {
     display: flex;
@@ -41,6 +50,7 @@
     border-radius: 5px;
 
 }
+
 
 .index-img {
     object-fit: cover;
@@ -76,12 +86,17 @@ ul, li {
 }
 
 .categories-index {
-    color:rgb(79, 134, 252);
+    color: $secondary;
     font-weight: bold;
 }
 
 .btn-right {
     margin-bottom: 20px;
+}
+
+// trying to change text color for the buttons
+.btn {
+    margin: 3px;
 }
 
 .jumbotron-index {
