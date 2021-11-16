@@ -2,6 +2,8 @@ class Listing < ApplicationRecord
   belongs_to :user
   belongs_to :location
 
+  resourcify
+
   accepts_nested_attributes_for :location
 
   has_many :listing_categories, dependent: :destroy

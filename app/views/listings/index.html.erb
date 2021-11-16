@@ -1,7 +1,12 @@
-
 <%= render 'search' %>
 <br>
-<h1>Listings</h1>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4 title-index">Listings</h1>
+      <p class="lead text-index">Here a magical world of plant-based, home-cooked meals opens up for you!</p>
+    </div>
+  </div>
 <br>
 
 
@@ -18,6 +23,11 @@
         <div class="card-body">
             <h5 class="card-title"><%= listing.title %></h5>
             <p class="card-text menu-description "><%= listing.description %></p>
+            <% if listing.categories != 0 %>
+              <% listing.categories.each do |cat| %>
+                 <span class="card-text categories-index"><%= cat.name %></span>
+              <% end %>
+            <% end %>
             <p class="card-text"><%= listing.location %></p>
             <p class="card-text"><%= number_to_currency(listing.price) %></p>
             <%= link_to "Show more", listing_path(listing.id), class:"btn btn-primary btn-right" %>

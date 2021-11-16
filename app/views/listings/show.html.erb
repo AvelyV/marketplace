@@ -5,8 +5,12 @@
         
           <hr class="my-4">
           <p ><%= @listing.description %></p>
-          <!-- add username? -->
-          <p > Listing by: <%=link_to "#{@listing.user.email}", user_path(@listing.user.id) %></p>
+          <% if @listing.categories != 0 %>
+              <% @listing.categories.each do |cat| %>
+                 <p class="card-text categories-index"><%= cat.name %></p>
+              <% end %>
+            <% end %>
+          <p > Listing by: <%=link_to "#{@listing.user.username}", user_path(@listing.user.id) %></p>
           <p >Available:<%= @listing.qty %></p>
           <p ><%= @listing.location %></p>
           <p ><%= number_to_currency(@listing.price) %></p>

@@ -3,6 +3,7 @@ class ListingsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :correct_user, only: %i[edit update destroy]
   before_action :set_category, only: %i[new edit]
+
   
 
   # GET /listings or /listings.json
@@ -72,16 +73,30 @@ class ListingsController < ApplicationController
   end
 
   def search
-    if params[:type] == "user"
+    
+    case params[:type]
+    when "category"
       @listings = []
-      users = Listing.where("username LIKE ?", "%#{params[:query]}%")
-      users.each do |user|
-        user.listings do |listing|
-          @listings.push(listing)
+      cats = Category.where("name ILIKE ?", "%#{params[:query].strip}%")
+      cats.each do |cat|
+        cat.listings.each do |listing|
+          @listings << listing
         end
       end
-    else
-      @listings = Listing.where("? LIKE ?", "%#{params[:type]}%", "%#{params[:query]}%")
+    when "postcode"
+      @listings = []
+      int_post = params[:query].to_i
+      p params[:type]
+      p int_post
+      locs = Location.where("postcode = ?", int_post)
+      p locs
+      locs.each do |loc|
+        loc.listings.each do |listing|
+          @listings << listing
+        end
+      end
+    when "title"
+      @listings = Listing.where("title ILIKE ?", "%#{params[:query].strip}%")
     end
     render "index"
   end

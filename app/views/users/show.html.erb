@@ -1,5 +1,5 @@
 <h1><%= @user.username %></h1>
-<% if @user != current_user %>
+<% if @user != current_user && user_signed_in?%>
   <div class="leave-rating">
     <%= link_to 'Leave a rating', create_rating_path(@user.id), class:"btn btn-primary rating" %>
   </div>
@@ -11,12 +11,10 @@
 </div>
 
 
-
+<h2><%= @user.username  %>'s Listings:</h2>
 <div class="flex">
-
     <% @user.listings.each do |listing| %>
       <% if listing.qty > 0 %>
-        <h2><%= @user.username  %>'s Listings:</h2>
         <div class="card" style="width: 18rem;">
           <% if !listing.picture.attached? %>
             <%= image_tag "brachiosaur.jpg", class:"card-img-top index-img", width: 300, height: 200 %>
@@ -31,6 +29,8 @@
               <%= link_to "Show more", listing_path(listing.id), class:"btn btn-primary btn-right" %>
           </div>
         </div>
+        <% else %> 
+        <h2>No active listings</h2>
       <% end %>
     <% end %>
   
@@ -48,7 +48,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><%= rating.rating %>/10</h5>
                     <p class="card-text menu-description "><%= rating.comment %></p>
-                    <p>By <%= rating.rating_giver.first_name %></p>
+                    <p>By <%= rating.rating_giver.username %></p>
 
                 </div>
             </div>
