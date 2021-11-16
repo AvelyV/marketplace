@@ -53,6 +53,10 @@
 
 #comp-name {
     font-family: 'Bebas Neue', cursive;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    font: 120px;
 }
 
 .rating {
@@ -63,7 +67,11 @@
     transform: scaleX(-1);
 }
 
-.nav-link:hover, .text-decoration-none:hover {
+ul, li {
+    list-style: none;
+}
+
+.nav-link:hover, .text-decoration-none:hover, .navbar-brand:hover {
     background-color: #ffff0000;
 }
 

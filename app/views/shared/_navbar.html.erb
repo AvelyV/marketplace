@@ -1,42 +1,49 @@
-<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom" >
-   <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-     <%= image_tag  'brachiosaur.jpg', width: 50, height: 50 %>
-     <h3 id="comp-name">BRACHIO</h3>
-   </a>
-   <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-    <li>
-      <%= link_to "Listings", listings_path, class: "nav-link" %>
-    </li>
-    <li>
-      <%= link_to "About", root_path, class: "nav-link" %>
-    </li>
-  </ul>
- 
-   <div class="col-md-3 text-end">
-     
-    <% if user_signed_in? %>
-    <li class="nav-item dropdown">
-      <% if current_user.has_role? :admin %>
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <%= "#{current_user.username}(admin)" %>
-        </a>
-      <% else %>
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <%= current_user.username %>
-        </a>
-      <% end %>
-      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <li><%= link_to 'New Listing', new_listing_path, class:"nav-link" %></li>
-        <li><%= link_to 'Profile', user_path(current_user), class: "nav-link" %></li>
-        <li><%= link_to 'Manage Reviews', ratings_path, class: "nav-link" %></li>
-        <li><%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %></li>
-        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
-      </ul>
-    </li>
 
-    <% else %>
-    <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
-    <%= link_to "Sign In", new_user_session_path, class: "btn btn-secondary" %>
-    <% end %>
-   </div>
- </header>
+
+
+
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+ 
+      <%# image_tag  'brachiosaur.jpg', width: 50, height: 50 %>
+      <a class="navbar-brand" href="/">
+      <h3 id="comp-name">BRACHIO</h3></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to "About", root_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Listings", listings_path, class: "nav-link" %>
+        </li>
+
+
+      </ul>
+      <% if user_signed_in? %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <% if current_user.has_role? :admin %>
+            <%= "#{current_user.username}(admin)" %>
+          <% else %>
+            <%= current_user.username %>
+          <% end %>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><%= link_to 'New Listing', new_listing_path, class:"nav-link" %></li>
+          <li><%= link_to 'Profile', user_path(current_user), class: "nav-link" %></li>
+          <li><%= link_to 'Manage Reviews', ratings_path, class: "nav-link" %></li>
+          <li><%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+        </ul>
+      </li>
+      <% else %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+      <%= link_to "Sign In", new_user_session_path, class: "btn btn-secondary" %>
+      <% end %>
+    </div>
+  </div>
+</nav>
