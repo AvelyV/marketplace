@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_111751) do
+ActiveRecord::Schema.define(version: 2021_11_16_042938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_111751) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "rating_receiver_id"
     t.bigint "rating_giver_id"
+    t.index ["rating_giver_id", "rating_receiver_id"], name: "index_ratings_on_rating_giver_id_and_rating_receiver_id", unique: true
     t.index ["rating_giver_id"], name: "index_ratings_on_rating_giver_id"
     t.index ["rating_receiver_id"], name: "index_ratings_on_rating_receiver_id"
   end

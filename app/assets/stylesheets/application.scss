@@ -82,13 +82,16 @@
     background-size: cover;
     height: 500px;
     border-radius: 5px;
+    display: flex;
 }
 
 
 .index-jumbo {
     width: 80%;
+    justify-content: center;
+    align-items: center;
     margin: auto;
-    background-color: rgba(255, 255, 255, 0.274);
+    background-color: rgba(255, 255, 255, 0.356);
     border-radius: 5px;
     padding: 20px;
 }
