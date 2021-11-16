@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   # giving a rating
   get "/rating/:id", to: "ratings#new", as: "create_rating"
   
+  
   # profile page
   get "/user/:id", to: "users#show", as: "user"
 end

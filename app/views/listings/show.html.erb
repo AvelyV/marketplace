@@ -18,8 +18,10 @@
           <% if user_signed_in? && current_user != @listing.user %>
             <%= link_to 'Buy One', buy_path(@listing.id), class:"btn btn-primary" %> |
           <% end %>
-          <% if user_signed_in? && current_user == @listing.user%>
-            <%= link_to 'Delete', listing_path(@listing.id), method: :delete, data: { confirm: 'Are you sure?' } %> |
+          <% if (user_signed_in? && current_user == @listing.user)  || policy(@listing).destroy?%>
+            <%= link_to 'Delete', listing_path(@listing.id), method: :delete, data: { confirm: 'Are you sure?' } %> 
+          <% end %>
+          <% if user_signed_in? && current_user == @listing.user %>
             <%= link_to 'Edit', edit_listing_path(@listing) %> |
           <% end %>
 

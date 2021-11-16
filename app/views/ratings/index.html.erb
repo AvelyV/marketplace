@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% @ratings.each do |rating| %>
+    <% current_user.ratings_given.each do |rating| %>
       <tr>
         <td><%= rating.rating %></td>
         <td><%= rating.comment %></td>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Rating', new_rating_path %>
+<p>To leave a new review, go on a user profile you wish to review</p>

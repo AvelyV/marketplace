@@ -1,4 +1,3 @@
-
 <%= simple_form_for(@rating) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -7,7 +6,7 @@
     <% f.input :rating_receiver_id, label: "Rating for: ", :input_html => { :value => params[:id] }%>
     <%= f.input :rating, collection: 0..10, prompt: "Rating", selected: 10 %>
     <%= f.input :comment %>
-    <%= f.input :rating_giver_id, :as => :hidden, :input_html => { :value => current_user.id }%>
+    <% f.input :rating_giver_id, :input_html => { :value => current_user.id }%>
   </div>
 
   <div class="form-actions">

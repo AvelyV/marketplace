@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ListingsPolicy
+class ListingPolicy
   attr_reader :user, :record
 
   def initialize(user, record)
@@ -33,7 +33,8 @@ class ListingsPolicy
   end
 
   def destroy?
-    true
+    # || user == current_user
+    user.has_role?(:admin)
   end
 
   class Scope

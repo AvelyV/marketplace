@@ -16,12 +16,19 @@
      
     <% if user_signed_in? %>
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <%= current_user.username %>
-      </a>
+      <% if current_user.has_role? :admin %>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= "#{current_user.username}(admin)" %>
+        </a>
+      <% else %>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= current_user.username %>
+        </a>
+      <% end %>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         <li><%= link_to 'New Listing', new_listing_path, class:"nav-link" %></li>
         <li><%= link_to 'Profile', user_path(current_user), class: "nav-link" %></li>
+        <li><%= link_to 'Manage Reviews', ratings_path, class: "nav-link" %></li>
         <li><%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %></li>
         <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
       </ul>

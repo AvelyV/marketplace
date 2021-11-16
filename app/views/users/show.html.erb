@@ -1,8 +1,14 @@
 <h1><%= @user.username %></h1>
 <% if @user != current_user && user_signed_in?%>
+  <% if !current_user.ratings_given.where(rating_receiver_id: params[:id]) %>   
+    <div class="leave-rating">
+      <%= link_to 'Leave a rating', create_rating_path(@user.id), class:"btn btn-primary rating" %>
+    </div>
+  <!-- <% else %>
   <div class="leave-rating">
-    <%= link_to 'Leave a rating', create_rating_path(@user.id), class:"btn btn-primary rating" %>
-  </div>
+    <%# link_to 'Edit rating', edit_rating_path(@user.id), class:"btn btn-primary rating" %>
+  </div>  -->
+<% end %>
 <% end %>
 <div><%= @user.about_me %></div>
 <div>
