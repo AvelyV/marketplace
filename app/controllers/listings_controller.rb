@@ -8,11 +8,17 @@ class ListingsController < ApplicationController
 
   # GET /listings or /listings.json
   def index
-    @listings = Listing.all
+    @listings = Listing.includes(:user, :location, :listing_categories).all
   end
 
   # GET /listings/1 or /listings/1.json
-  def show; end
+  def show
+    # begin
+    #    @listing = Listing.joins(user: [:username, :email]).find(params[:id])
+    #  rescue
+    #    redirect_to listings_path
+    #  end
+  end
 
   # GET /listings/new
   def new
@@ -36,7 +42,9 @@ class ListingsController < ApplicationController
       @listing.location_id = loc_exist.id
     # if location does not exist, create
     else
-      Location.create!(location_params)
+      location = Location.create!(location_params)
+      @listing.location_id = location.id
+
     end
 
     respond_to do |format|
@@ -65,7 +73,7 @@ class ListingsController < ApplicationController
 
   # DELETE /listings/1 or /listings/1.json
   def destroy
-    @listing.destroy
+    @listing.destroy if @listing != nil
     respond_to do |format|
       format.html { redirect_to listings_url, notice: "Listing was successfully destroyed." }
       format.json { head :no_content }
@@ -105,7 +113,11 @@ class ListingsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_listing
-    @listing = Listing.find(params[:id])
+    begin
+     @listing = Listing.find(params[:id])
+    rescue
+      redirect_to listings_path
+    end
   end
 
   # Only allow a list of trusted parameters through.

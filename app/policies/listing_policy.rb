@@ -17,7 +17,7 @@ class ListingPolicy
   end
 
   def create?
-    return user.has_role?(:admin)
+    true
   end
 
   def new?
