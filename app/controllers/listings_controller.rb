@@ -4,21 +4,14 @@ class ListingsController < ApplicationController
   before_action :correct_user, only: %i[edit update destroy]
   before_action :set_category, only: %i[new edit]
 
-  
-
   # GET /listings or /listings.json
   def index
-    @listings = Listing.includes(:user, :location, :listing_categories).all
+    @listings = Listing.select(%i[title description id user_id location_id price qty]).includes(:location, :categories,
+                                                                                                :picture_attachment).all
   end
 
   # GET /listings/1 or /listings/1.json
-  def show
-    # begin
-    #    @listing = Listing.joins(user: [:username, :email]).find(params[:id])
-    #  rescue
-    #    redirect_to listings_path
-    #  end
-  end
+  def show; end
 
   # GET /listings/new
   def new
@@ -35,12 +28,12 @@ class ListingsController < ApplicationController
     # create location
     location = Location.new(location_params)
     loc_exist = Location.find_by(location_params)
-    
-    # if location exists
+
+    #  location exists
     if loc_exist
       # point to excisting record
       @listing.location_id = loc_exist.id
-    # if location does not exist, create
+
     else
       location = Location.create!(location_params)
       @listing.location_id = location.id
@@ -73,7 +66,7 @@ class ListingsController < ApplicationController
 
   # DELETE /listings/1 or /listings/1.json
   def destroy
-    @listing.destroy if @listing != nil
+    @listing.destroy
     respond_to do |format|
       format.html { redirect_to listings_url, notice: "Listing was successfully destroyed." }
       format.json { head :no_content }
@@ -81,7 +74,6 @@ class ListingsController < ApplicationController
   end
 
   def search
-    
     case params[:type]
     when "category"
       @listings = []
@@ -106,6 +98,7 @@ class ListingsController < ApplicationController
     when "title"
       @listings = Listing.where("title ILIKE ?", "%#{params[:query].strip}%")
     end
+
     render "index"
   end
 
@@ -113,11 +106,9 @@ class ListingsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_listing
-    begin
-     @listing = Listing.find(params[:id])
-    rescue
-      redirect_to listings_path
-    end
+    @listing = Listing.find(params[:id])
+  rescue StandardError
+    redirect_to listings_path
   end
 
   # Only allow a list of trusted parameters through.
@@ -133,7 +124,7 @@ class ListingsController < ApplicationController
 
   def correct_user
     @listing = current_user.listings.find_by(id: params[:id])
-    redirect_to listings_path, notice: "Not authorised to alter this listing" if @listing.nil?
+    (redirect_to listings_path, notice: "Not authorised to alter this listing") if @listing.nil?
   end
 
   def set_category

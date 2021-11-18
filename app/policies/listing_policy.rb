@@ -33,8 +33,7 @@ class ListingPolicy
   end
 
   def destroy?
-    # || user == current_user
-    user.has_role?(:admin)
+    true
   end
 
   class Scope

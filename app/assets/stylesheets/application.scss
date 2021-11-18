@@ -17,14 +17,21 @@
 
 $primary: #12dbb0;
 $secondary: #00c79c;
+$thirdindary: #b4ffef;
 $danger: #ff4136;
 
 
 @import "bootstrap";
 
-
 body, html {
     height: 100%;
+}
+
+.head {
+    background-color: $thirdindary;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
 }
 
 

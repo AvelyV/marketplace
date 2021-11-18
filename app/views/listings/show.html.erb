@@ -17,6 +17,10 @@
             <p ><%= number_to_currency(@listing.price) %></p>
 
             <% if user_signed_in? && current_user != @listing.user %>
+              <%# form_with "/buy/listing_id/qty", method: :get do |form| %>
+                <%# form.label :quantity %>
+                <%# form.number_field :qty %>
+              <%# end %>
               <%= link_to 'Buy One', buy_path(@listing.id), class:"btn btn-primary" %> |
             <% end %>
             <% if (user_signed_in? && current_user == @listing.user)  || policy(@listing).destroy?%>

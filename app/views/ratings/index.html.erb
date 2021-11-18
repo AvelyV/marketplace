@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>User</th>
       <th>Rating</th>
       <th>Comment</th>
       <th colspan="3"></th>
@@ -14,6 +15,7 @@
   <tbody>
     <% current_user.ratings_given.each do |rating| %>
       <tr>
+        <td><%= rating.rating_receiver.username %></td>
         <td><%= rating.rating %></td>
         <td><%= rating.comment %></td>
         <td><%= link_to 'Show', rating %></td>
@@ -26,4 +28,4 @@
 
 <br>
 
-<p>To leave a new review, go on a user profile you wish to review</p>
+<p>To leave a rating, go on a user profile you wish to review</p>

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'pages#home'
 
-  get "/buy/:listing_id", to: "orders#buy", as: "buy"
+  get "/buy/:listing_id/qty", to: "orders#buy", as: "buy"
   get "/success", to: "orders#success", as: "success"
   get "/cancel", to: "orders#cancel", as: "cancel"
 
