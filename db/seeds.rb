@@ -11,11 +11,11 @@ Category.destroy_all
 Location.destroy_all
 Listing.destroy_all
 
-a = User.create!(email: "test@test.com", password: "password", first_name: "Molly", last_name: "McTesty",
+a = User.create!(email: "test@test.com", password: "password",
              about_me: "I like to cook and share it with the world. All my meals are vegan and super convenient", username: "MollyHolly")
-b = User.create!(email: "a@b.com", password: "password", first_name: "Albert", last_name: "Stone",
+b = User.create!(email: "a@b.com", password: "password",
              about_me: "I'm just here to get access to yummy meals. I mostly like comfort food", username: "Foodie765")
-third = User.create!(email: "sam@test.com", password: "password", first_name: "Samantha", last_name: "Bolder",
+third = User.create!(email: "sam@test.com", password: "password",
                      about_me: "I love to cook! I am also available for catering if you are interested, get in contact!", username: "Samantha")
 
 Rating.create!(rating_giver_id: a.id, rating_receiver_id: b.id, rating: 8, comment: "Very easy to deal with, no problems.")
@@ -107,8 +107,8 @@ Listing.create!(picture: {io: File.open(Rails.root.join('app/assets/images/burge
 
 
 
-puts "#{User.count}/2 users were created"
+puts "#{User.count}/3 users were created"
 puts "#{Category.count}/13 categories were created"
 puts "#{Location.count}/2 locations were created"
-puts "#{Listing.count}/6 listings were created"
+puts "#{Listing.count}/7 listings were created"
 puts "#{Rating.count}/2 reviews were created"
