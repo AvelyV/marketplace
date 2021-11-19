@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   def buy
     Stripe.api_key = (ENV['STRIPE_API_KEY']).to_s
 
+    # find the record in listings tabel that matches id passed in in parameters
     listing_in = Listing.find(params[:listing_id])
 
     line_item = {

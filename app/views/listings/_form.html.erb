@@ -11,7 +11,7 @@
     <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
 
     <%= f.input :price %>
-    <%= f.input :qty %>
+    <%= f.input :qty, collection: 1..500 %>
     <% f.association :location %>
     
   </div>

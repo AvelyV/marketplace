@@ -58,9 +58,10 @@ class CategoriesController < ApplicationController
   
     private
 
-    # Use callbacks to share common setup or constraints between actions.
+    # In categories table finds a category that matches id in the paramas
     def set_category
       @category = Category.find(params[:id])
+      raise
     end
   
     # Only allow a list of trusted parameters through.

@@ -28,8 +28,7 @@ class ListingsController < ApplicationController
   def create
     # create listing
     @listing = Listing.new(listing_params)
-    # create location
-    # @location = Location.new(location_params)
+    # see, if the location user entered already excists in the db
     @location = Location.find_by(location_params)
 
     #  location exists
@@ -78,6 +77,7 @@ class ListingsController < ApplicationController
     case params[:type]
     when "category"
       @listings = []
+      # Look for a record in categories table, name column that contains string entered by the user
       cats = Category.where("name ILIKE ?", "%#{params[:query].strip}%")
       cats.each do |cat|
         cat.listings.each do |listing|
@@ -89,6 +89,7 @@ class ListingsController < ApplicationController
       int_post = params[:query].to_i
       p params[:type]
       p int_post
+      # Look in the locations table where column postcode value matches postcode entered by the user
       locs = Location.where("postcode = ?", int_post)
       p locs
       locs.each do |loc|
@@ -97,6 +98,7 @@ class ListingsController < ApplicationController
         end
       end
     when "title"
+      # look in the listings table to find records in title column that contain user entered string
       @listings = Listing.where("title ILIKE ?", "%#{params[:query].strip}%")
     end
 
@@ -107,6 +109,7 @@ class ListingsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_listing
+    # looking in the listings table to find a listing with matching id
     @listing = Listing.find(params[:id])
   rescue StandardError
     redirect_to listings_path
@@ -124,6 +127,7 @@ class ListingsController < ApplicationController
   end
 
   def correct_user
+    # looking in the listings table, to see if current user has a listing that matches @listing id
     @listing = current_user.listings.find_by(id: params[:id])
     (redirect_to listings_path, notice: "Not authorised to alter this listing") if @listing.nil?
   end
