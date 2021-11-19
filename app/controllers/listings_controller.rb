@@ -16,34 +16,35 @@ class ListingsController < ApplicationController
   # GET /listings/new
   def new
     @listing = Listing.new
+    @location = Location.new
   end
 
   # GET /listings/1/edit
-  def edit; end
+  def edit
+    @location = @listing.location
+  end
 
   # POST /listings or /listings.json
   def create
     # create listing
     @listing = Listing.new(listing_params)
     # create location
-    location = Location.new(location_params)
-    loc_exist = Location.find_by(location_params)
+    # @location = Location.new(location_params)
+    @location = Location.find_by(location_params)
 
     #  location exists
-    if loc_exist
+    if @location
       # point to excisting record
-      @listing.location_id = loc_exist.id
-
+      @listing.location = @location
     else
-      location = Location.create!(location_params)
-      @listing.location_id = location.id
-
+      @listing.location = Location.new(location_params)
+      @location = @listing.location
     end
 
     respond_to do |format|
       if @listing.save
         format.html { redirect_to @listing, notice: "Listing was successfully created." }
-        format.json { render :show, status: :created, location: @listing }
+        format.json { render :show, status: :created }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @listing.errors, status: :unprocessable_entity }

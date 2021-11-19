@@ -28,7 +28,6 @@
             <% end %>
             <% if user_signed_in? && current_user == @listing.user %>
               <%= link_to 'Edit Listing', edit_listing_path(@listing) %> |
-              <%= link_to 'Edit Location', edit_location_path(@listing.location_id) %> |
             <% end %>
 
             
