@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
     include Pundit
 
+    helper_method :current_user
+
     rescue_from Pundit::NotAuthorizedError, with: :forbidden
 
     protect_from_forgery with: :exception

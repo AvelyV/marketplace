@@ -12,4 +12,8 @@ class User < ApplicationRecord
 
   validates :about_me, presence: true, length: { minimum: 50, maximum: 1000 }
   validates :username, presence: true, uniqueness: true, length: { minimum: 2, maximum: 50 }
+
+  def can_rate?(other_user)
+    return self != other_user && self.ratings_given.where(rating_receiver_id: other_user.id).empty?
+  end
 end

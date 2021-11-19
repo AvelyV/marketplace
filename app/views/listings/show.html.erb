@@ -11,23 +11,28 @@
                   <p class="card-text categories-index"><%= cat.name %></p>
                 <% end %>
               <% end %>
-            <p > Listing by: <%=link_to "#{@listing.user.username}", user_path(@listing.user.id) %></p>
+
+            <% if user_signed_in? %>
+              <p > Listing by: <%=link_to "#{@listing.user.username}", user_path(@listing.user.id) %></p>
+            <% else %>
+              <p > Listing by: <%="#{@listing.user.username}" %></p>
+            <% end %>
+
             <p >Available:<%= @listing.qty %></p>
             <p ><%= @listing.location %></p>
             <p ><%= number_to_currency(@listing.price) %></p>
 
-            <% if user_signed_in? && current_user != @listing.user %>
-              <%# form_with "/buy/listing_id/qty", method: :get do |form| %>
-                <%# form.label :quantity %>
-                <%# form.number_field :qty %>
-              <%# end %>
-              <%= link_to 'Buy One', buy_path(@listing.id), class:"btn btn-primary" %> |
-            <% end %>
-            <% if (user_signed_in? && current_user == @listing.user)  || policy(@listing).destroy?%>
-              <%= link_to 'Delete', listing_path(@listing.id), method: :delete, data: { confirm: 'Are you sure?' } %> |
-            <% end %>
-            <% if user_signed_in? && current_user == @listing.user %>
-              <%= link_to 'Edit Listing', edit_listing_path(@listing) %> |
+
+            <% if user_signed_in? %>
+              <% if current_user != @listing.user %>
+                <%= link_to 'Buy One', buy_path(@listing.id), class:"btn btn-primary" %> |
+              <% end %>
+              <% if  current_user == @listing.user %>
+                <%= link_to 'Delete', listing_path(@listing.id), method: :delete, data: { confirm: 'Are you sure?' } %> |
+              <% end %>
+              <% if current_user == @listing.user %>
+                <%= link_to 'Edit Listing', edit_listing_path(@listing) %> |
+              <% end %>
             <% end %>
 
             
