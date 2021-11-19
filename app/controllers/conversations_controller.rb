@@ -1,9 +1,9 @@
-class ConversationController < ApplicationController 
+class ConversationsController < ApplicationController 
     before_action :authenticate_user! 
 
     def index 
-        @users = Users.all 
-        @conversations = Conversations.all 
+        @users = User.all 
+        @conversations = Conversation.all 
     end
 
     def create 
@@ -18,7 +18,7 @@ class ConversationController < ApplicationController
     private
 
     def conversation_params 
-        params.require(:conversation).permit(:sender_id, :receiver_id)
+        params.permit(:sender_id, :receiver_id)
     end
 
 end

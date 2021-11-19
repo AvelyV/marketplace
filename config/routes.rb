@@ -20,4 +20,8 @@ Rails.application.routes.draw do
 
   # location edit
   get "location/edit/:id", to: "location#edit", as: "edit_location"
+
+  resources :conversations do
+    resources :messages
+  end
 end

@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :ratings_received, class_name: "Rating", foreign_key: "rating_receiver_id", dependent: :destroy
 
   has_many :listings, dependent: :destroy
+  has_many :messages
+  has_many :conversations
 
   validates :about_me, presence: true, length: { minimum: 50, maximum: 1000 }
   validates :username, presence: true, uniqueness: true, length: { minimum: 2, maximum: 50 }
