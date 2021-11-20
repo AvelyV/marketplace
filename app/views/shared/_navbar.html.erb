@@ -35,6 +35,7 @@
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <li><%= link_to 'New Listing', new_listing_path, class:"nav-link" %></li>
           <li><%= link_to 'Profile', user_path(current_user), class: "nav-link" %></li>
+          <li><%= link_to 'Inbox', conversations_path, class: "nav-link" %></li>
           <li><%= link_to 'Manage Reviews', ratings_path, class: "nav-link" %></li>
           <li><%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %></li>
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>

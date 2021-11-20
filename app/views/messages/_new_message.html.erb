@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="col-md-10 col-md-offset-1">
+        <%= form_for [@conversation, @message] do |f| %>
+        <div class="form-group">
+            <%= f.text_area :body, class: "form-control" %>
+        </div>
+            <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+        <div class="form-group">
+            <%= f.submit "Send", class: "form-control btn btn-primary" %>
+        </div>
+        <% end %>
+    </div>
+</div>
