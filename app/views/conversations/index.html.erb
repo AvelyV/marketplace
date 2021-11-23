@@ -19,19 +19,6 @@
          </div>
         </div>
        </div>
-      <!-- <div>
-        <div>
-        <h3>All Users:</h3>
-          <% @users.each do |user| %>
-            <% if user.id != current_user.id %>
-            <div class="item"><h3>
-          <%= link_to "#{user.username}",
-          conversations_path(sender_id: current_user.id, receiver_id: user.id), method: :post%>
-        </h3></div>
-          <% end %>
-        <% end %>
-        </div>
-      </div> -->
     </div>
     </div>
   </div>

@@ -14,12 +14,14 @@
 
             <% if user_signed_in? %>
               <p > Listing by: <%=link_to "#{@listing.user.username}", user_path(@listing.user.id) %></p>
+              <% if @listing.user != current_user %>
               <p>
 
                   <%= link_to "Message",
                      conversations_path(sender_id: current_user.id, receiver_id: @listing.user.id), method: :post, class:"btn btn-primary rating"%>
 
               </p>
+              <% end%>
             <% else %>
               <p > Listing by: <%="#{@listing.user.username}" %></p>
             <% end %>

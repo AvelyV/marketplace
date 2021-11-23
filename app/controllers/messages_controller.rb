@@ -22,6 +22,7 @@ class MessagesController < ApplicationController
   end
 
   def find_conversation
+    # from db, find a conversation with is passed in by paramas
     @conversation = Conversation.find(params[:conversation_id])
   end
 end

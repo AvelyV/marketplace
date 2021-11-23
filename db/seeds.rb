@@ -10,6 +10,8 @@ User.destroy_all
 Category.destroy_all
 Location.destroy_all
 Listing.destroy_all
+Conversation.destroy_all
+Rating.destroy_all
 
 a = User.create!(email: "test@test.com", password: "password",
              about_me: "I like to cook and share it with the world. All my meals are vegan and super convenient", username: "MollyHolly")
