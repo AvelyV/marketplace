@@ -46,6 +46,6 @@ class OrdersController < ApplicationController
   end
 
   def cancel
-    redirect_to listings_path, alert: "Something went wrong, try again"
+    redirect_to listings_path, alert: "Cancelled"
   end
 end

@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
-  before_action :correct_user, only: %i[edit update destroy]
+  before_action :correct_user, only: %i[edit update]
   before_action :set_category, only: %i[new edit]
 
   # GET /listings or /listings.json
