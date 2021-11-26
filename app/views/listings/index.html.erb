@@ -21,7 +21,7 @@
         <%= cl_image_tag listing.picture.key, crop: :fill, class:"card-img-top index-img", width: 300, height: 200, cloud_name: 'dzfu3lc6p' %>
       <% end %>
         <div class="card-body">
-            <h5 class="card-title"><%= listing.title %></h5>
+            <h5 class="card-title"><%= listing %></h5>
             <div class="fade-out"></div>
             <p class="card-text menu-description "><%= listing.description %></p>
             <% if listing.categories != 0 %>

@@ -1,6 +1,6 @@
 class Location < ApplicationRecord
 
-    has_many :listings
+    has_many :listings, dependent: :destroy
 
     validates :state, presence: true
     validates :suburb, presence: true, length: { minimum: 2, maximum: 31 }, format: { with: /\A[a-zA-Z\s]+\z/,
