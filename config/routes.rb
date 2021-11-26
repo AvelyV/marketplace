@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'pages#home'
 
-  get "/buy/:listing_id/qty", to: "orders#buy", as: "buy"
+  get "/listings/:listing_id/buy", to: "orders#buy", as: "buy_listing"
   get "/success", to: "orders#success", as: "success"
   get "/cancel", to: "orders#cancel", as: "cancel"
 
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # giving a rating
   get "/rating/:id", to: "ratings#new", as: "create_rating"
-  
+
   # profile page
   get "/user/:id", to: "users#show", as: "user"
 

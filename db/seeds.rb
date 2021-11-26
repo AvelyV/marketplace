@@ -47,7 +47,7 @@ Listing.create!(picture: { io: File.open(Rails.root.join('app/assets/images/panc
                       title: "Fluffy Pancakes", 
                       description: "It’s been lovely. My pancake endeavors have paid off, too.I realized the other day that I don’t have a basic pancake recipe on the blog, so here we are.Meet my new favorite pancake recipe. It’s easy, healthy and vegan, to boot!", 
                       price: 10, 
-                      qty: 4, 
+                      qty: 0, 
                       user_id: a.id, 
                       location_id: c.id, 
                       categories: [s, kf])

@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+  
   def buy
-    Stripe.api_key = (ENV['STRIPE_API_KEY']).to_s
+    Stripe.api_key = ENV['STRIPE_API_KEY']
 
     # find the record in listings tabel that matches id passed in in parameters
     listing_in = Listing.find(params[:listing_id])
@@ -25,15 +27,13 @@ class OrdersController < ApplicationController
                                                  cancel_url: cancel_url + "?session_id={CHECKOUT_SESSION_ID}",
                                                  client_reference_id: listing_in.id
                                                })
-    # respond_to do |format|
-    #     format.js
-    # end1)
+
 
     redirect_to session.url
   end
 
   def success
-    session = Stripe::Checkout::Session.retrieve("#{params[:session_id]}")
+    session = Stripe::Checkout::Session.retrieve(params[:session_id].to_s)
     # reduce qty on the listing by qty bought
     if params[:session_id].present?
       p params

@@ -33,7 +33,7 @@
 
             <% if user_signed_in? %>
               <% if current_user != @listing.user %>
-                <%= link_to 'Buy One', buy_path(@listing.id), class:"btn btn-primary" %> |
+                <%= link_to 'Buy One', buy_listing_path(@listing.id), data: {turbolinks: false}, class:"btn btn-primary" %> |
               <% end %>
               <% if  (current_user == @listing.user || policy(@listing).destroy?) %>
                 <%= link_to 'Delete', listing_path(@listing.id), method: :delete, data: { confirm: 'Are you sure?' } %> |

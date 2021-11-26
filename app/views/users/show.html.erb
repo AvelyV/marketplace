@@ -24,7 +24,7 @@
 <h2><%= @user.username  %>'s Listings:</h2>
 <div class="flex">
     <% @user.listings.each do |listing| %>
-      <% if listing.qty > 0 %>
+      <% if listing.qty > 0%>
         <div class="card" style="width: 18rem;">
           <% if !listing.picture.attached? %>
             <%= image_tag "brachiosaur.jpg", class:"card-img-top index-img", width: 300, height: 200 %>
@@ -32,7 +32,7 @@
             <%= cl_image_tag listing.picture.key, crop: :fill, class:"card-img-top index-img", width: 300, height: 200, cloud_name: 'dzfu3lc6p' %>
           <% end %>
           <div class="card-body">
-              <h5 class="card-title"><%= listing.title %></h5>
+              <h5 class="card-title"><%= listing %></h5>
               <div class="fade-out"></div>
               <p class="card-text menu-description "><%= listing.description %></p>
               <p class="card-text"><%= listing.location %></p>
@@ -40,11 +40,38 @@
               <%= link_to "Show more", listing_path(listing.id), class:"btn btn-primary btn-right" %>
           </div>
         </div>
-        <% else %> 
-        <h2>No active listings</h2>
+      <% else %> 
+        <!-- <h2>No active listings</h2> -->
       <% end %>
     <% end %>
   
+</div>
+
+<!-- inactive listings -->
+<% if current_user == @user %>
+<h2>Inactive Listings:</h2>
+  <div class="flex">
+    <% @user.listings.each do |listing| %>
+      <% if listing.qty == 0 %>
+        <div class="card" style="width: 18rem;">
+          <% if !listing.picture.attached? %>
+            <%= image_tag "brachiosaur.jpg", class:"card-img-top index-img", width: 300, height: 200 %>
+          <% else %>
+            <%= cl_image_tag listing.picture.key, crop: :fill, class:"card-img-top index-img", width: 300, height: 200, cloud_name: 'dzfu3lc6p' %>
+          <% end %>
+          <div class="card-body">
+              <h5 class="card-title"><%= listing %></h5>
+              <div class="fade-out"></div>
+              <p class="card-text menu-description "><%= listing.description %></p>
+              <p class="card-text"><%= listing.location %></p>
+              <p class="card-text"><%= number_to_currency(listing.price) %></p>
+              <%= link_to "Show more", listing_path(listing.id), class:"btn btn-primary btn-right" %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+<% end %>
+
 </div>
 
 <!-- ratings section -->

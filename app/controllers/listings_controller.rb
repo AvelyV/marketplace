@@ -10,6 +10,10 @@ class ListingsController < ApplicationController
                                                                                                 :picture_attachment).all
   end
 
+  def foo
+    render plain: :foo
+  end
+  
   # GET /listings/1 or /listings/1.json
   def show; end
 
